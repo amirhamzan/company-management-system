@@ -13,11 +13,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Add GR Tech default users
+        // Since no password is set, so default value will be 'password'
+        User::factory()
+            ->count(2)
+            ->sequence(
+                ['name' => 'Admin', 'email' => 'admin@grtech.com'],
+                ['name' => 'User', 'email' => 'user@grtech.com'],
+            )
+            ->create();
     }
 }
