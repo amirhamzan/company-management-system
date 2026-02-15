@@ -91,9 +91,11 @@ const dataSource = computed(() => props.companies);
                                 <template v-else-if="column.key === 'action'">
                                     <span>
                                         <span class="">
-                                            <a class="text-yellow-500">
-                                                Edit <edit-outlined />
-                                            </a>
+                                            <Link :href="route('companies.edit', record.id)">
+                                                <a class="text-yellow-500">
+                                                    Edit <edit-outlined />
+                                                </a>
+                                            </Link>
                                         </span>
                                         <a-divider type="vertical" />
                                         <a class="text-red-500">
