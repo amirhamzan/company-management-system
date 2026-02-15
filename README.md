@@ -23,6 +23,7 @@ A robust Laravel-based CRUD application designed to manage corporate structures 
 | **Company Detail** | ![Detail Modal](system_preview/company_details.png) |
 | **Employees Table** | ![Employees Table](system_preview/employees.png) |
 | **Employee Edit** | ![Employees Table](system_preview/employee_edit.png) |
+| **Employee Modal Delete** | ![Employees Table](system_preview/employee_delete.png) |
 
 ---
 
