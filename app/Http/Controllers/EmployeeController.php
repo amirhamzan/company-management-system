@@ -27,7 +27,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $companies = Company::select(['id', 'name'])->orderByDesc('created_at')->get();
+        $companies = Company::select(['id', 'name', 'logo'])->orderByDesc('created_at')->get();
 
         return Inertia::render('Employees/Create', ['companies' => $companies]);
     }

@@ -121,7 +121,17 @@ const showDeleteConfirm = (selectedEmployee) => {
                                     </Link>
                                 </template>
                                 <template v-else-if="column.key === 'company_id'">
-                                    {{ record.company?.name || 'No Company' }}
+                                    <div v-if="record.company" class="flex items-center gap-2">
+                                        <a-avatar v-if="record.company.logo" :src="record.company.logo"
+                                            shape="square" />
+                                        <a-avatar v-else style="background-color: #722ed1" shape="square">
+                                            {{ record.company.name.charAt(0).toUpperCase() }}
+                                        </a-avatar>
+
+                                        <span>{{ record.company.name }}</span>
+                                    </div>
+
+                                    <span v-else class="text-gray-400 italic">No Company</span>
                                 </template>
                                 <template v-else-if="column.key === 'action'">
                                     <span>
