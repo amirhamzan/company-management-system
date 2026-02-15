@@ -12,12 +12,12 @@ const props = defineProps({ employee: Object })
 
 <template>
 
-    <Head :title="employee.first_name" />
+    <Head :title="employee.first_name + ' ' + employee.last_name" />
 
     <AuthenticatedLayout>
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                {{ employee.first_name }}
+                {{ employee.first_name }} {{ employee.last_name }}
             </h2>
         </template>
 

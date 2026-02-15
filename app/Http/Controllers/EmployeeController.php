@@ -41,8 +41,7 @@ class EmployeeController extends Controller
 
         $employee = Employee::create($validated);
 
-        // return redirect()->route('employees.show', $employee->id)->with('success', "Employee '{$employee->first_name}' '{$employee->last_name}' created successfully!");
-        return redirect()->route('employees.index', $employee->id)->with('success', "Employee '{$employee->first_name} {$employee->last_name}' created successfully!");
+        return redirect()->route('employees.show', $employee->id)->with('success', "Employee '{$employee->first_name}' '{$employee->last_name}' created successfully!");
     }
 
     /**
