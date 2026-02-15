@@ -18,14 +18,8 @@ const columns = [
         key: 'id',
     },
     {
-        title: 'First Name',
-        dataIndex: 'first_name',
-        key: 'first_name',
-    },
-    {
-        title: 'Last Name',
-        dataIndex: 'last_name',
-        key: 'last_name',
+        title: 'Full Name',
+        key: 'full_name',
     },
     {
         title: 'Company',
@@ -120,6 +114,13 @@ const showDeleteConfirm = (selectedEmployee) => {
                                         </span>
                                     </Link>
                                 </template>
+                                <template v-else-if="column.key === 'full_name'">
+                                    <Link :href="route('employees.show', record.id)">
+                                        <span class="font-medium text-blue-600 hover:underline">
+                                            {{ `${record.first_name} ${record.last_name}` }}
+                                        </span>
+                                    </Link>
+                                </template>
                                 <template v-else-if="column.key === 'company_id'">
                                     <div v-if="record.company" class="flex items-center gap-2">
                                         <a-avatar v-if="record.company.logo" :src="record.company.logo"
@@ -128,20 +129,20 @@ const showDeleteConfirm = (selectedEmployee) => {
                                             {{ record.company.name.charAt(0).toUpperCase() }}
                                         </a-avatar>
 
-                                        <span>{{ record.company.name }}</span>
+                                        <Link class="font-medium ml-2 text-blue-600 hover:underline"
+                                            :href="route('companies.show', record.company_id)">{{ record.company.name }}
+                                        </Link>
                                     </div>
 
                                     <span v-else class="text-gray-400 italic">No Company</span>
                                 </template>
                                 <template v-else-if="column.key === 'action'">
                                     <span>
-                                        <span class="">
-                                            <Link :href="route('employees.edit', record.id)">
-                                                <a class="text-yellow-500">
-                                                    Edit <edit-outlined />
-                                                </a>
-                                            </Link>
-                                        </span>
+                                        <Link :href="route('employees.edit', record.id)">
+                                            <a-button class="text-yellow-500">
+                                                Edit <edit-outlined />
+                                            </a-button>
+                                        </Link>
                                         <a-divider type="vertical" />
                                         <a-button danger @click="showDeleteConfirm(record)" class="text-red-500">
                                             Delete <delete-outlined />

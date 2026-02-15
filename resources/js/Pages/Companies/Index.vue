@@ -123,13 +123,11 @@ const showDeleteConfirm = (selectedCompany) => {
                                 </template>
                                 <template v-else-if="column.key === 'action'">
                                     <span>
-                                        <span class="">
-                                            <Link :href="route('companies.edit', record.id)">
-                                                <a class="text-yellow-500">
-                                                    Edit <edit-outlined />
-                                                </a>
-                                            </Link>
-                                        </span>
+                                        <Link :href="route('companies.edit', record.id)">
+                                            <a-button class="text-yellow-500">
+                                                Edit <edit-outlined />
+                                            </a-button>
+                                        </Link>
                                         <a-divider type="vertical" />
                                         <a-button danger @click="showDeleteConfirm(record)" class="text-red-500">
                                             Delete <delete-outlined />
