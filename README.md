@@ -14,6 +14,17 @@ A robust Laravel-based CRUD application designed to manage corporate structures 
 * **Database:** SQLite
 
 ---
+## System Preview
+
+| Feature | Interface Preview |
+| :--- | :--- |
+| **Dashboard** | ![Dashboard](system_preview/dashboard.png) |
+| **Companies Table** | ![Companies Table](system_preview/companies.png) |
+| **Company Detail** | ![Detail Modal](system_preview/company_details.png) |
+| **Employees Table** | ![Employees Table](system_preview/employees.png) |
+| **Employee Edit** | ![Employees Table](system_preview/employee_edit.png) |
+
+---
 
 ## Features
 
