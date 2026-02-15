@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Employee\StoreEmployeeRequest;
+use App\Http\Requests\Employee\UpdateEmployeeRequest;
 use App\Models\Company;
 use App\Models\Employee;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $companies = Company::select(['id', 'name', 'logo'])->orderByDesc('created_at')->get();
+        $companies = Company::select(['id', 'name'])->orderByDesc('created_at')->get();
 
         return Inertia::render('Employees/Create', ['companies' => $companies]);
     }
@@ -41,7 +42,7 @@ class EmployeeController extends Controller
 
         $employee = Employee::create($validated);
 
-        return redirect()->route('employees.show', $employee->id)->with('success', "Employee '{$employee->first_name}' '{$employee->last_name}' created successfully!");
+        return redirect()->route('employees.show', $employee->id)->with('success', "Employee '{$employee->first_name} {$employee->last_name}' created successfully!");
     }
 
     /**
@@ -61,17 +62,25 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
+        $companies = Company::select(['id', 'name'])->orderByDesc('created_at')->get();
+
         return Inertia::render('Employees/Edit', [
             'employee' => $employee,
+            'companies' => $companies,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Employee $employee)
+    public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
         //
+        $validated = $request->validated();
+
+        $employee->update($validated);
+
+        return redirect()->route('employees.show', $employee->id)->with('success', "Employee '{$employee->first_name} {$employee->last_name}' updated successfully!");
     }
 
     /**

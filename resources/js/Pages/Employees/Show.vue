@@ -62,7 +62,7 @@ const props = defineProps({ employee: Object })
                                 </Link>
                                 <Link :href="route('employees.edit', [employee.id])">
                                     <a-button style="margin-left: 10px" type="primary" class="rounded-xl">
-                                        Edit Company
+                                        Edit Employee
                                     </a-button>
                                 </Link>
                             </a-form-item>
