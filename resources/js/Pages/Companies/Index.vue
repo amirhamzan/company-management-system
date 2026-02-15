@@ -1,8 +1,9 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, Link, usePage } from '@inertiajs/vue3';
-import { computed } from 'vue';
-import { ExportOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons-vue';
+import { Head, Link, usePage, router } from '@inertiajs/vue3';
+import { computed, createVNode } from 'vue';
+import { ExportOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons-vue';
+import { Modal } from 'ant-design-vue';
 
 const page = usePage();
 
@@ -38,6 +39,24 @@ const columns = [
 ];
 
 const dataSource = computed(() => props.companies);
+
+const showDeleteConfirm = (selectedCompany) => {
+    Modal.confirm({
+        title: 'Are you sure delete this company?',
+        icon: createVNode(ExclamationCircleOutlined),
+        content: selectedCompany.name,
+        okText: 'Yes',
+        okType: 'danger',
+        cancelText: 'No',
+        onOk() {
+            console.log(selectedCompany);
+            router.delete(route('companies.destroy', selectedCompany.id));
+        },
+        onCancel() {
+            console.log("Cancel delete " + selectedCompany.name);
+        },
+    });
+};
 </script>
 
 <template>
@@ -98,9 +117,10 @@ const dataSource = computed(() => props.companies);
                                             </Link>
                                         </span>
                                         <a-divider type="vertical" />
-                                        <a class="text-red-500">
+                                        <a-button danger @click="showDeleteConfirm(record)"
+                                            class="text-red-500">
                                             Delete <delete-outlined />
-                                        </a>
+                                        </a-button>
                                     </span>
                                 </template>
                             </template>

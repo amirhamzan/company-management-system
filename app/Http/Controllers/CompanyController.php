@@ -7,6 +7,7 @@ use App\Http\Requests\Company\UpdateCompanyRequest;
 use App\Models\Company;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class CompanyController extends Controller
@@ -80,6 +81,13 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        // Delete the logo file if it exists
+        // if ($company->logo) {
+        //     Storage::disk('public')->delete($company->logo);
+        // }
+
+        $company->delete();
+
+        return redirect()->route('companies.index')->with('success', "Company '{$company->name}' was deleted successfully.");
     }
 }
