@@ -50,7 +50,11 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        //
+        $employee->load('company');
+
+        return Inertia::render('Employees/Show', [
+            'employee' => $employee,
+        ]);
     }
 
     /**
@@ -58,7 +62,9 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        return Inertia::render('Employees/Edit', [
+            'employee' => $employee,
+        ]);
     }
 
     /**
