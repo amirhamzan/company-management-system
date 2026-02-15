@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class EmployeeController extends Controller
 {
@@ -12,7 +13,11 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $employees = Employee::with('company')->orderByDesc('created_at')->paginate(10);
+
+        return Inertia::render('Employees/Index', [
+            'employees' => $employees,
+        ]);
     }
 
     /**
