@@ -7,7 +7,7 @@ const wrapperCol = { span: 14 };
 
 const page = usePage();
 
-defineProps({ company: Object })
+const props = defineProps({ company: Object })
 </script>
 
 <template>

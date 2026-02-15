@@ -1,9 +1,48 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link, usePage } from '@inertiajs/vue3';
+import { computed } from 'vue';
+import { ExportOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons-vue';
 
 const page = usePage();
 
+const props = defineProps({
+    companies: Object
+});
+
+const columns = [
+    {
+        title: 'Index',
+        dataIndex: 'id',
+        key: 'id',
+    },
+    {
+        title: 'Name',
+        dataIndex: 'name',
+        key: 'name',
+    },
+    {
+        title: 'Email',
+        dataIndex: 'email',
+        key: 'email',
+    },
+    {
+        title: 'Website',
+        key: 'website',
+        dataIndex: 'website',
+    },
+    {
+        title: 'Logo',
+        key: 'logo',
+        dataIndex: 'logo',
+    },
+    {
+        title: 'Action',
+        key: 'action',
+    },
+];
+
+const dataSource = computed(() => props.companies);
 </script>
 
 <template>
@@ -33,8 +72,34 @@ const page = usePage();
                             </a-button>
                         </Link>
                     </div>
-                    <div class="p-6 text-gray-900">
-                        ...
+                    <div class="p-6 text-gray-900 overflow-x-auto">
+                        <a-table :dataSource="dataSource" :columns="columns">
+                            <template #bodyCell="{ column, record }">
+                                <template v-if="column.key === 'name'">
+                                    <Link :href="route('companies.show', record.id)">
+                                        <span>
+                                            {{ record.name }}
+                                        </span>
+                                    </Link>
+                                </template>
+                                <template v-else-if="column.key === 'website'">
+                                    <a class="flex items-center" :href="record.website" target="_blank"
+                                        rel="noopener noreferrer">
+                                        <span style="margin-right: 3px;">{{ record.website }}</span>
+                                        <export-outlined />
+                                    </a>
+                                </template>
+                                <template v-else-if="column.key === 'action'">
+                                    <span>
+                                        <span class="">
+                                            <a class="text-yellow-500">Edit <edit-outlined /></a>
+                                        </span>
+                                        <a-divider type="vertical" />
+                                        <a class="text-red-500">Delete <delete-outlined /></a>
+                                    </span>
+                                </template>
+                            </template>
+                        </a-table>
                     </div>
                 </div>
             </div>

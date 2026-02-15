@@ -15,7 +15,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::all();
+        $companies = Company::orderByDesc('created_at')->get();
 
         return Inertia::render('Companies/Index', [
             'companies' => $companies,
