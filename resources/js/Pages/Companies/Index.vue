@@ -21,7 +21,9 @@ const page = usePage();
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6 pb-0 text-gray-900" v-if="page.props.flash.success">
-                        <a-alert :message="page.props.flash.success" type="success" />
+                        <a-space direction="vertical" style="width: 100%">
+                            <a-alert :message="page.props.flash.success" type="success" show-icon />
+                        </a-space>
                     </div>
                     <div class="p-6 text-gray-900 flex justify-between items-center">
                         <span>List of companies</span>
