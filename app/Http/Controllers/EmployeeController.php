@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Employee\StoreEmployeeRequest;
+use App\Models\Company;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -25,15 +27,22 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        $companies = Company::select(['id', 'name'])->orderByDesc('created_at')->get();
+
+        return Inertia::render('Employees/Create', ['companies' => $companies]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreEmployeeRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $employee = Employee::create($validated);
+
+        // return redirect()->route('employees.show', $employee->id)->with('success', "Employee '{$employee->first_name}' '{$employee->last_name}' created successfully!");
+        return redirect()->route('employees.index', $employee->id)->with('success', "Employee '{$employee->first_name} {$employee->last_name}' created successfully!");
     }
 
     /**
