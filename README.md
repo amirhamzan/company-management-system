@@ -1,66 +1,97 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Company Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A robust Laravel-based CRUD application designed to manage corporate structures and personnel. This project utilizes the **Inertia.js** stack, combining the power of **Laravel** with the reactivity of **Vue 3** and the polished UI components of **Ant Design Vue**.
 
-## About Laravel
+## Tech Stack & Packages
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+* **Language:** PHP 8.2
+* **Framework:** Laravel 11.x
+* **Frontend:** Vue 3 (Composition API)
+* **Bridge:** InertiaJS
+* **Starter Kit:** Laravel Breeze (Authentication)
+* **UI Library:** Ant Design Vue 4.x
+* **Styling:** Tailwind CSS
+* **Database:** SQLite
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Features
 
-## Learning Laravel
+### 1. Authentication & Security
+* **Breeze Integration:** Full login functionality with the Registration feature removed for security.
+* **Role-Based Access Control (RBAC):** * `admin@grtech.com`: Full access to Companies and Employees CRUD.
+    * `user@grtech.com`: Restricted from accessing management routes via custom **Middleware**.
+* **Auth Middleware:** All management routes are protected and require a valid session.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 2. Companies Management
+* **CRUD Operations:** Full Create, Read, Update, and Delete capabilities.
+* **Media Handling:** Logos are stored in `storage/app/public` and linked via `php artisan storage:link`.
+* **Data Structure:** Name (Required), Email, Logo, and Website.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 3. Employees Management
+* **CRUD Operations:** Full management of staff members.
+* **Relational Data:** Employees are linked to Companies via foreign keys.
+* **Data Structure:** First Name (Required), Last Name (Required), Company (Relationship), Email, and Phone.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 4. Advanced UI Components (Ant Design Vue)
+* **Server-Side Data Tables:** High-performance tables for both Companies and Employees featuring:
+    * Server-side pagination.
+    * Custom column rendering (Clickable website links, Logo previews).
+    * **Interactive Company Links:** Clicking a company name in the Employee list opens a detailed info modal.
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Database Implementation
 
-### Premium Partners
+* **Migrations:** Structured schemas for `companies` and `employees` with proper cascading deletes and foreign key constraints.
+* **Seeding:** Automated seeder to generate the default Admin and User accounts upon installation.
+* **Resources:** Implementation of **Laravel API Resources** and **Collections** to ensure a standardized JSON structure between the server and the Ant Design components.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+---
 
-## Contributing
+## Installation & Setup
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/amirhamzan/company-management-system.git
+    ```
 
-## Code of Conduct
+2.  **Install PHP dependencies:**
+    ```bash
+    composer install
+    ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3.  **Install JS dependencies:**
+    ```bash
+    npm install && npm run build
+    ```
 
-## Security Vulnerabilities
+4.  **Environment Setup:**
+    ```bash
+    cp .env.example .env
+    php artisan key:generate
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+5.  **Database & Seeding:**
+    ```bash
+    php artisan migrate --seed
+    ```
 
-## License
+6.  **Storage Link:**
+    ```bash
+    php artisan storage:link
+    ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+7.  **Run the Project:**
+    ```bash
+    php artisan serve
+    ```
+
+---
+
+## Default Credentials
+
+| Role | Email | Password |
+| :--- | :--- | :--- |
+| **Administrator** | `admin@grtech.com` | `password` |
+| **Standard User** | `user@grtech.com` | `password` |
