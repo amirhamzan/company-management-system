@@ -82,10 +82,9 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        // Delete the logo file if it exists
-        // if ($company->logo) {
-        //     Storage::disk('public')->delete($company->logo);
-        // }
+        if ($company->logo) {
+            Storage::disk('public')->delete($company->logo);
+        }
 
         $company->delete();
 
