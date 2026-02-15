@@ -17,7 +17,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::orderByDesc('created_at')->get();
+        $companies = Company::orderByDesc('created_at')->paginate(10);
 
         return Inertia::render('Companies/Index', [
             'companies' => $companies,
@@ -88,6 +88,6 @@ class CompanyController extends Controller
 
         $company->delete();
 
-        return redirect()->route('companies.index')->with('success', "Company '{$company->name}' was deleted successfully.");
+        return back()->with('success', "Company '{$company->name}' was deleted successfully.");
     }
 }

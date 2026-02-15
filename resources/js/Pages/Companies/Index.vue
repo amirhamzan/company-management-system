@@ -38,7 +38,20 @@ const columns = [
     },
 ];
 
-const dataSource = computed(() => props.companies);
+const dataSource = computed(() => props.companies.data);
+
+const pagination = computed(() => ({
+    total: props.companies.total,
+    current: props.companies.current_page,
+    pageSize: props.companies.per_page,
+}));
+
+const handleTableChange = (pag) => {
+    router.get(
+        route('companies.index'),
+        { page: pag.current }
+    );
+};
 
 const showDeleteConfirm = (selectedCompany) => {
     Modal.confirm({
@@ -87,7 +100,8 @@ const showDeleteConfirm = (selectedCompany) => {
                         </Link>
                     </div>
                     <div class="p-6 text-gray-900 overflow-x-auto">
-                        <a-table :dataSource="dataSource" :columns="columns">
+                        <a-table :dataSource="dataSource" :columns="columns" :pagination="pagination"
+                            @change="handleTableChange">
                             <template #bodyCell="{ column, record }">
                                 <template v-if="column.key === 'name'">
                                     <Link :href="route('companies.show', record.id)">
@@ -117,8 +131,7 @@ const showDeleteConfirm = (selectedCompany) => {
                                             </Link>
                                         </span>
                                         <a-divider type="vertical" />
-                                        <a-button danger @click="showDeleteConfirm(record)"
-                                            class="text-red-500">
+                                        <a-button danger @click="showDeleteConfirm(record)" class="text-red-500">
                                             Delete <delete-outlined />
                                         </a-button>
                                     </span>
