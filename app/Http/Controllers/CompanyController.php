@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Company\StoreCompanyRequest;
+use App\Http\Requests\Company\UpdateCompanyRequest;
 use App\Models\Company;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -57,15 +58,21 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        dd($company);
+        return Inertia::render('Companies/Edit', [
+            'company' => $company,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Company $company)
+    public function update(UpdateCompanyRequest $request, Company $company)
     {
-        //
+        $validated = $request->validated();
+
+        $company->update($validated);
+
+        return redirect()->route('companies.show', $company->id)->with('success', "Company '{$company->name}' updated successfully!");
     }
 
     /**
