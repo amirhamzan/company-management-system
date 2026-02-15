@@ -32,11 +32,6 @@ const columns = [
         dataIndex: 'website',
     },
     {
-        title: 'Logo',
-        key: 'logo',
-        dataIndex: 'logo',
-    },
-    {
         title: 'Action',
         key: 'action',
     },
@@ -77,7 +72,11 @@ const dataSource = computed(() => props.companies);
                             <template #bodyCell="{ column, record }">
                                 <template v-if="column.key === 'name'">
                                     <Link :href="route('companies.show', record.id)">
-                                        <span>
+                                        <a-avatar v-if="record.logo" :src="record.logo" shape="square" />
+                                        <a-avatar v-else style="background-color: #722ed1" shape="square">
+                                            {{ record.name.charAt(0).toUpperCase() }}
+                                        </a-avatar>
+                                        <span class="font-medium ml-2 text-blue-600 hover:underline">
                                             {{ record.name }}
                                         </span>
                                     </Link>
