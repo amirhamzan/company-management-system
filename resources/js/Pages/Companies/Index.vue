@@ -1,7 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
-import { Button } from 'ant-design-vue';
+import { Head, Link } from '@inertiajs/vue3';
 </script>
 
 <template>
@@ -18,9 +17,16 @@ import { Button } from 'ant-design-vue';
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900 flex justify-between items-center">
+                        <span>List of companies</span>
+                        <Link :href="route('companies.create')">
+                            <a-button type="primary" class="rounded-xl">
+                                Add Company
+                            </a-button>
+                        </Link>
+                    </div>
                     <div class="p-6 text-gray-900">
-                        List of companies
-                        <Button type="primary" danger>Test button</Button>
+                        ...
                     </div>
                 </div>
             </div>

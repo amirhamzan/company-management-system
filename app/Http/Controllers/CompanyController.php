@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Company\StoreCompanyRequest;
 use App\Models\Company;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,9 +15,11 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        //
+        $companies = Company::all();
 
-        return Inertia::render('Companies/Index');
+        return Inertia::render('Companies/Index', [
+            'companies' => $companies,
+        ]);
     }
 
     /**
@@ -23,14 +27,16 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Companies/Create', []);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCompanyRequest $request): RedirectResponse
     {
+        dd($request->all());
+
         //
     }
 
