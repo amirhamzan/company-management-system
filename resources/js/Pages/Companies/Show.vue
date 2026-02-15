@@ -32,8 +32,8 @@ const props = defineProps({ company: Object })
                     <div class="p-6 text-gray-900">
                         <a-form :model="company" :label-col="labelCol" :wrapper-col="wrapperCol">
                             <a-form-item label="Logo" name="logo">
-                                <a-avatar v-if="company.logo" :src="company.logo" size="large" shape="square" />
-                                <a-avatar v-else style="background-color: #722ed1" size="large" shape="square">
+                                <a-avatar v-if="company.logo" :src="company.logo" :size="100" shape="square" />
+                                <a-avatar v-else style="background-color: #722ed1" :size="100" shape="square">
                                     {{ company.name.charAt(0).toUpperCase() }}
                                 </a-avatar>
                             </a-form-item>
