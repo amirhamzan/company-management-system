@@ -91,10 +91,14 @@ const dataSource = computed(() => props.companies);
                                 <template v-else-if="column.key === 'action'">
                                     <span>
                                         <span class="">
-                                            <a class="text-yellow-500">Edit <edit-outlined /></a>
+                                            <a class="text-yellow-500">
+                                                Edit <edit-outlined />
+                                            </a>
                                         </span>
                                         <a-divider type="vertical" />
-                                        <a class="text-red-500">Delete <delete-outlined /></a>
+                                        <a class="text-red-500">
+                                            Delete <delete-outlined />
+                                        </a>
                                     </span>
                                 </template>
                             </template>

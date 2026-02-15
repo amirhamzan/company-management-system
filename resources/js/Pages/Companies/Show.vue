@@ -31,6 +31,12 @@ const props = defineProps({ company: Object })
                     </div>
                     <div class="p-6 text-gray-900">
                         <a-form :model="company" :label-col="labelCol" :wrapper-col="wrapperCol">
+                            <a-form-item label="Logo" name="logo">
+                                <a-avatar v-if="company.logo" :src="company.logo" size="large" shape="square" />
+                                <a-avatar v-else style="background-color: #722ed1" size="large" shape="square">
+                                    {{ company.name.charAt(0).toUpperCase() }}
+                                </a-avatar>
+                            </a-form-item>
                             <a-form-item label="ID" name="id">
                                 <a-input :value="company.id" disabled />
                             </a-form-item>
@@ -42,9 +48,6 @@ const props = defineProps({ company: Object })
                             </a-form-item>
                             <a-form-item label="Website" name="website">
                                 <a-input :value="company.website" disabled />
-                            </a-form-item>
-                            <a-form-item label="Logo">
-                                <a-input :value="company.logo" disabled />
                             </a-form-item>
                             <a-form-item label="Created at">
                                 <a-input :value="company.created_at" disabled />
