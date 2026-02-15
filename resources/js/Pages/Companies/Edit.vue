@@ -10,6 +10,7 @@ const page = usePage();
 const props = defineProps({ company: Object })
 
 const formCompany = useForm({
+    name: props.company.name,
     email: props.company.email,
     website: props.company.website,
 });
@@ -37,6 +38,13 @@ const onFinish = () => {
                     <div class="p-6 text-gray-900">
                         <a-form :model="formCompany" :label-col="labelCol" :wrapper-col="wrapperCol" @finish="onFinish"
                             autocomplete="off">
+                            <a-form-item label="Company name" name="name" :rules="[
+                                { required: true, message: 'Company name is required.' },
+                                { min: 3, message: 'Company name must be at least 3 characters.' }]"
+                                :validate-status="formCompany.errors.name ? 'error' : ''"
+                                :help="formCompany.errors.name">
+                                <a-input v-model:value="formCompany.name" />
+                            </a-form-item>
                             <a-form-item label="Email" name="email" :rules="[
                                 { required: false },
                                 { type: 'email', message: 'Please enter a valid email address.' }]"
