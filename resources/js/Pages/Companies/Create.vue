@@ -59,12 +59,11 @@ const onFinish = () => {
                                 <a-input v-model:value="formCompany.logo" disabled />
                             </a-form-item>
                             <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
-                                <a-button type="primary" html-type="submit"
-                                    :disabled="formCompany.processing">Create</a-button>
                                 <Link :href="route('companies.index')">
-                                    <a-button style="margin-left: 10px"
-                                        :disabled="formCompany.processing">Cancel</a-button>
+                                    <a-button :disabled="formCompany.processing">Cancel</a-button>
                                 </Link>
+                                <a-button style="margin-left: 10px" type="primary" html-type="submit"
+                                    :disabled="formCompany.processing">Create</a-button>
                             </a-form-item>
                         </a-form>
                     </div>

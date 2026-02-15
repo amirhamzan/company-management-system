@@ -47,7 +47,9 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        //
+        return Inertia::render('Companies/Show', [
+            'company' => $company,
+        ]);
     }
 
     /**
@@ -55,7 +57,7 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        //
+        dd($company);
     }
 
     /**
