@@ -27,7 +27,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Companies/Create', []);
+        return Inertia::render('Companies/Create');
     }
 
     /**
@@ -35,9 +35,11 @@ class CompanyController extends Controller
      */
     public function store(StoreCompanyRequest $request): RedirectResponse
     {
-        dd($request->all());
+        $validated = $request->validated();
 
-        //
+        $company = Company::create($validated);
+
+        return redirect()->route('companies.index')->with('success', "Company '{$company->name}' created successfully!");
     }
 
     /**
