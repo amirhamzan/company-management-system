@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Company\StoreCompanyRequest;
+use App\Http\Requests\Company\UpdateCompanyLogoRequest;
 use App\Http\Requests\Company\UpdateCompanyRequest;
 use App\Models\Company;
 use Illuminate\Http\RedirectResponse;
@@ -89,5 +90,33 @@ class CompanyController extends Controller
         $company->delete();
 
         return back()->with('success', "Company '{$company->name}' was deleted successfully.");
+    }
+
+    public function editLogo(Company $company)
+    {
+        return Inertia::render('Companies/Logo', [
+            'company' => $company,
+        ]);
+    }
+
+    public function updateLogo(UpdateCompanyLogoRequest $request, Company $company)
+    {
+        if ($request->hasFile('logo')) {
+            $file = $request->file('logo');
+
+            $fileName = time() . '_' . $file->getClientOriginalName();
+
+            $file->move(storage_path('app/public/logos'), $fileName);
+
+            $path = 'logos/' . $fileName;
+
+            if ($company->logo) {
+                Storage::disk('public')->delete($company->logo);
+            }
+
+            $company->update(['logo' => $path]);
+        }
+
+        return back()->withErrors(['logo' => 'No file was uploaded.']);
     }
 }

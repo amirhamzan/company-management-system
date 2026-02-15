@@ -1,6 +1,8 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link, usePage } from '@inertiajs/vue3';
+import { UploadOutlined } from '@ant-design/icons-vue';
+
 
 const labelCol = { style: { width: '150px' } };
 const wrapperCol = { span: 14 };
@@ -32,10 +34,15 @@ const props = defineProps({ company: Object })
                     <div class="p-6 text-gray-900">
                         <a-form :model="company" :label-col="labelCol" :wrapper-col="wrapperCol">
                             <a-form-item label="Logo" name="logo">
-                                <a-avatar v-if="company.logo" :src="company.logo" :size="100" shape="square" />
+                                <a-avatar v-if="company.logo" :src="company.getLogoUrlAttribute" :size="100" shape="square" />
                                 <a-avatar v-else style="background-color: #722ed1" :size="100" shape="square">
                                     {{ company.name.charAt(0).toUpperCase() }}
                                 </a-avatar>
+                                <Link :href="route('companies.editLogo', company.id)">
+                                    <a-button type="dashed">
+                                        Edit Company Logo <upload-outlined />
+                                    </a-button>
+                                </Link>
                             </a-form-item>
                             <a-form-item label="ID" name="id">
                                 <a-input :value="company.id" disabled />

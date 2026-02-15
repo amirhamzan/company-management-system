@@ -27,6 +27,9 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('is_grtech_admin')->group(function () {
         Route::resource('companies', CompanyController::class);
+        Route::get('/companies/{company}/logo', [CompanyController::class, 'editLogo'])->name('companies.editLogo');
+        Route::post('/companies/{company}/logo', [CompanyController::class, 'updateLogo'])->name('companies.updateLogo');
+
         Route::resource('employees', EmployeeController::class);
     });
 });
